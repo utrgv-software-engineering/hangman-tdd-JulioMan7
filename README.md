@@ -1,4 +1,4 @@
-# Hangman Game Assignment
+# Hangman Game
 
 A Hangman Flutter app with unit, widget, and integration tests.
 
