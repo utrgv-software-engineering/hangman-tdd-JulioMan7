@@ -25,15 +25,41 @@ class HangmanGame {
   }
 
   bool guess(String letter) {
-    // TODO: Fill this in
+    if (RegExp(r'^[A-Za-z]').hasMatch(letter) &&
+        letter != '' &&
+        letter != null &&
+        letter.length == 1) {
+      if (_correctGuesses.contains(letter.toLowerCase()) ||
+          _wrongGuesses.contains(letter.toLowerCase())) return false;
+      if (_word.contains(letter)) {
+        _correctGuesses += letter;
+      } else {
+        _wrongGuesses += letter;
+      }
+      return true;
+    }
+    throw ArgumentError();
   }
 
   String blanksWithCorrectGuesses() {
-    // TODO: Fill this in
+    String partialWord = "";
+    for (int i = 0; i < _word.length; i++) {
+      if (_correctGuesses.contains(_word[i])) {
+        partialWord += _word[i];
+      } else {
+        partialWord += '-';
+      }
+    }
+    return partialWord;
   }
 
   String status() {
-    // TODO: Fill this in
+    if (blanksWithCorrectGuesses() == _word)
+      return 'win';
+    else if (_wrongGuesses.length == 7)
+      return 'lose';
+    else
+      return 'play';
   }
 
   //when running integration tests always return "banana"
