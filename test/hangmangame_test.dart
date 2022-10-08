@@ -30,6 +30,15 @@ void main() {
       //expect that the game doesn't have any incorrect guesses since we have not guessed anything yet
       expect(hangmanGame.wrongGuesses().isEmpty, isTrue);
     });
+
+    test('Function score() should be zero originally', () {
+      //make a variable that we will use to pass to the constructor as our word
+      String word = 'glorp';
+      //pass word to game constructor and create object called hangmanGame
+      final hangmanGame = HangmanGame(word);
+      //expect that the score is zero
+      expect(hangmanGame.score(), 0);
+    });
   });
 
   //This test group will run several tests on the way the game should respond to certain guesses
@@ -257,6 +266,126 @@ void main() {
       bool areWeInIntegrationTest = true;
       String word = await HangmanGame.getStartingWord(areWeInIntegrationTest);
       expect(word, 'banana');
+    });
+  });
+
+  group("Testing Scoring Logic", () {
+    test("after a single correct guess", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letter 'b'
+      hangmanGame.guess('b');
+      //add appropriate points
+      hangmanGame.points('b');
+      //We expect the game to return a score of +10
+      expect(hangmanGame.score(), 10);
+    });
+
+    test("after a single incorrect guess", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letter 'z'
+      hangmanGame.guess('z');
+      //subtract appropriate points
+      hangmanGame.points('z');
+      //We expect the game to return a score of -5
+      expect(hangmanGame.score(), -5);
+    });
+
+    test("after multiple correct guesses", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'b', and 'a'
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      //add appropriate points
+      hangmanGame.points('b');
+      hangmanGame.points('a');
+      //We expect the game to return a score of +40
+      expect(hangmanGame.score(), 40);
+    });
+
+    test("after multiple incorrect guesses", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'z', and 'y'
+      hangmanGame.guess('z');
+      hangmanGame.guess('y');
+      //subtract appropriate points
+      hangmanGame.points('z');
+      hangmanGame.points('y');
+      //We expect the game to return a score of -10
+      expect(hangmanGame.score(), -10);
+    });
+
+    test("after some correct and some incorrect guesses", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'b', 'z', 'a', and 'y'
+      hangmanGame.guess('b');
+      hangmanGame.guess('z');
+      hangmanGame.guess('a');
+      hangmanGame.guess('y');
+      //add appropriate points
+      hangmanGame.points('b');
+      hangmanGame.points('z');
+      hangmanGame.points('a');
+      hangmanGame.points('y');
+      //We expect the game to return a score of +30
+      expect(hangmanGame.score(), 30);
+    });
+
+    test("after all letters guessed", () {
+      //Start a game with the word banana
+      String word = 'banana';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'b', 'a', 'n'
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      hangmanGame.guess('n');
+      //add appropriate points
+      hangmanGame.points('b');
+      hangmanGame.points('a');
+      hangmanGame.points('n');
+      //We expect the game to return a score of +60
+      expect(hangmanGame.score(), 60);
+    });
+
+    test("for long words", () {
+      //Start a game with the word banana
+      String word = 'acceptances';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'b', 'a', 'c'
+      hangmanGame.guess('b');
+      hangmanGame.guess('a');
+      hangmanGame.guess('c');
+      //add appropriate points
+      hangmanGame.points('b');
+      hangmanGame.points('a');
+      hangmanGame.points('c');
+      //We expect the game to return a score of +25
+      expect(hangmanGame.score(), 25);
+    });
+
+    test("for short words", () {
+      //Start a game with the word banana
+      String word = 'jazz';
+      final hangmanGame = HangmanGame(word);
+      //Guess the letters 'z', 'a', 'p'
+      hangmanGame.guess('z');
+      hangmanGame.guess('a');
+      hangmanGame.guess('p');
+      //add appropriate points
+      hangmanGame.points('z');
+      hangmanGame.points('a');
+      hangmanGame.points('p');
+      //We expect the game to return a score of +31
+      expect(hangmanGame.score(), 31);
     });
   });
 }

@@ -4,12 +4,14 @@ class HangmanGame {
   String _word;
   String _correctGuesses = "";
   String _wrongGuesses = "";
+  int _score;
 
   //Constructor starts off with blank strings that we will concatenate during the course of play
   HangmanGame(String word) {
     _word = word;
     _correctGuesses = "";
     _wrongGuesses = "";
+    _score = 0;
   }
 
   String correctGuesses() {
@@ -22,6 +24,10 @@ class HangmanGame {
 
   String word() {
     return _word;
+  }
+
+  int score() {
+    return _score;
   }
 
   bool guess(String letter) {
@@ -60,6 +66,27 @@ class HangmanGame {
       return 'lose';
     else
       return 'play';
+  }
+
+  int points(String letter) {
+    int count = 0;
+    //values for a word with >= 10 chars
+    int correct = 6;
+    int incorrect = 5;
+    /*increment points given for a guess for every word less than 10 chars 
+      based on how many chars < 10 it contains */
+    for (int i = _word.length; i < 10; i++) {
+      correct += 1;
+    }
+    //increment count for every instance of a guess letter in a word
+    for (int i = 0; i < _word.length; i++) {
+      if (_word[i] == letter) count++;
+    }
+    //calculate points based on appearance count of guess and length of word
+    if (count != 0)
+      return _score += (correct * count);
+    else
+      return _score -= incorrect;
   }
 
   //when running integration tests always return "banana"
