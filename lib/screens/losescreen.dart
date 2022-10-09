@@ -31,6 +31,11 @@ class LoseScreen extends StatelessWidget {
             Text('Your word was: ${game.word()}',
                 style: TextStyle(fontSize: 25)),
             Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Text("Score: ${game.score()}",
+                  key: Key('score-text'), style: TextStyle(fontSize: 17)),
+            ),
+            Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
             ),
             ElevatedButton(
