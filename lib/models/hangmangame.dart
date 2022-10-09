@@ -68,7 +68,7 @@ class HangmanGame {
       return 'play';
   }
 
-  int points(String letter) {
+  int points() {
     int count = 0;
     //values for a word with >= 10 chars
     int correct = 6;
@@ -80,13 +80,11 @@ class HangmanGame {
     }
     //increment count for every instance of a guess letter in a word
     for (int i = 0; i < _word.length; i++) {
-      if (_word[i] == letter) count++;
+      for (int j = 0; j < _correctGuesses.length; j++)
+        if (_word[i] == _correctGuesses[j]) count++;
     }
     //calculate points based on appearance count of guess and length of word
-    if (count != 0)
-      return _score += (correct * count);
-    else
-      return _score -= incorrect;
+    return _score = (correct * count) - (incorrect * wrongGuesses().length);
   }
 
   //when running integration tests always return "banana"

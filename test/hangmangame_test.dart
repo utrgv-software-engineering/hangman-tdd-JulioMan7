@@ -277,7 +277,7 @@ void main() {
       //Guess the letter 'b'
       hangmanGame.guess('b');
       //add appropriate points
-      hangmanGame.points('b');
+      hangmanGame.points();
       //We expect the game to return a score of +10
       expect(hangmanGame.score(), 10);
     });
@@ -289,7 +289,7 @@ void main() {
       //Guess the letter 'z'
       hangmanGame.guess('z');
       //subtract appropriate points
-      hangmanGame.points('z');
+      hangmanGame.points();
       //We expect the game to return a score of -5
       expect(hangmanGame.score(), -5);
     });
@@ -302,8 +302,7 @@ void main() {
       hangmanGame.guess('b');
       hangmanGame.guess('a');
       //add appropriate points
-      hangmanGame.points('b');
-      hangmanGame.points('a');
+      hangmanGame.points();
       //We expect the game to return a score of +40
       expect(hangmanGame.score(), 40);
     });
@@ -316,8 +315,7 @@ void main() {
       hangmanGame.guess('z');
       hangmanGame.guess('y');
       //subtract appropriate points
-      hangmanGame.points('z');
-      hangmanGame.points('y');
+      hangmanGame.points();
       //We expect the game to return a score of -10
       expect(hangmanGame.score(), -10);
     });
@@ -332,10 +330,7 @@ void main() {
       hangmanGame.guess('a');
       hangmanGame.guess('y');
       //add appropriate points
-      hangmanGame.points('b');
-      hangmanGame.points('z');
-      hangmanGame.points('a');
-      hangmanGame.points('y');
+      hangmanGame.points();
       //We expect the game to return a score of +30
       expect(hangmanGame.score(), 30);
     });
@@ -349,9 +344,7 @@ void main() {
       hangmanGame.guess('a');
       hangmanGame.guess('n');
       //add appropriate points
-      hangmanGame.points('b');
-      hangmanGame.points('a');
-      hangmanGame.points('n');
+      hangmanGame.points();
       //We expect the game to return a score of +60
       expect(hangmanGame.score(), 60);
     });
@@ -365,9 +358,7 @@ void main() {
       hangmanGame.guess('a');
       hangmanGame.guess('c');
       //add appropriate points
-      hangmanGame.points('b');
-      hangmanGame.points('a');
-      hangmanGame.points('c');
+      hangmanGame.points();
       //We expect the game to return a score of +25
       expect(hangmanGame.score(), 25);
     });
@@ -381,9 +372,7 @@ void main() {
       hangmanGame.guess('a');
       hangmanGame.guess('p');
       //add appropriate points
-      hangmanGame.points('z');
-      hangmanGame.points('a');
-      hangmanGame.points('p');
+      hangmanGame.points();
       //We expect the game to return a score of +31
       expect(hangmanGame.score(), 31);
     });

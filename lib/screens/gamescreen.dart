@@ -85,7 +85,7 @@ class _GameScreenState extends State<GameScreen> {
                                     'already used that letter';
                               } else {
                                 showError = false;
-                                widget.game.points(letter);
+                                widget.game.points();
                               }
 
                               // TODO: Reset the text in the textbox after a guess
