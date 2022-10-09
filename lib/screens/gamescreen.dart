@@ -49,6 +49,11 @@ class _GameScreenState extends State<GameScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                  child: Text("Score: ${widget.game.score()}",
+                      key: Key('score-text'), style: TextStyle(fontSize: 17)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
                   child: Text('Wrong Guesses: ' + widget.game.wrongGuesses(),
 
                       //Here we are giving the list of wrong guesses a key for use in our integration tests in test_driver/app_test.dart
@@ -69,7 +74,6 @@ class _GameScreenState extends State<GameScreen> {
                           setState(() {
                             //Get the string that the user typed in the box
                             String letter = guessTextController.text;
-
                             try {
                               // TODO: Calling the guess function on the game and passing it 'userGuess'
                               bool userGuess = widget.game.guess(letter);
@@ -81,6 +85,7 @@ class _GameScreenState extends State<GameScreen> {
                                     'already used that letter';
                               } else {
                                 showError = false;
+                                widget.game.points(letter);
                               }
 
                               // TODO: Reset the text in the textbox after a guess
@@ -91,7 +96,8 @@ class _GameScreenState extends State<GameScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => WinScreen()));
+                                        builder: (context) =>
+                                            WinScreen(widget.game)));
                               } else if (widget.game.status() == 'lose') {
                                 Navigator.push(
                                     context,

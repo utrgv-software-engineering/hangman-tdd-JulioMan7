@@ -40,6 +40,15 @@ void main() {
   );
 
   test(
+    'when the game starts we expect the score to be 0',
+    () async {
+      final findScoreTextWidget = find.byValueKey('score-text');
+
+      expect(await driver.getText(findScoreTextWidget), 'Score: 0');
+    },
+  );
+
+  test(
     'Once we are at our game screen, we should be able to guess the letter b and the game should register it as one correct letter',
     () async {
       //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
@@ -59,6 +68,15 @@ void main() {
 
       //We expect for the game to now have registered that we have correctly guessed the first letter of the word banana that we instantiated it with
       expect(await driver.getText(findLettersLeftProgressField), 'b-----');
+    },
+  );
+
+  test(
+    'when a correct letter is guessed we expect the score to increase',
+    () async {
+      final findScoreTextWidget = find.byValueKey('score-text');
+
+      expect(await driver.getText(findScoreTextWidget), 'Score: 10');
     },
   );
 
@@ -106,6 +124,15 @@ void main() {
   );
 
   test(
+    'when an incorrect letter is guessed we expect the score to decrease',
+    () async {
+      final findScoreTextWidget = find.byValueKey('score-text');
+
+      expect(await driver.getText(findScoreTextWidget), 'Score: 25');
+    },
+  );
+
+  test(
     'Once I have guessed all correct letters of a word, the game should be over and I should be navigated to the Win Screen',
     () async {
       //Here we assign variables using the keys we have placed on our widgets in our screens folder so we can use them in this test
@@ -122,6 +149,15 @@ void main() {
 
       //If we are successfully renavigated to the win screen we can expect to see this text
       expect(await driver.getText(findWinText), 'You Win');
+    },
+  );
+
+  test(
+    'At the win screen we expect the final score to be shown',
+    () async {
+      final findScoreTextWidget = find.byValueKey('score-text');
+
+      expect(await driver.getText(findScoreTextWidget), 'Score: 55');
     },
   );
 
@@ -160,6 +196,15 @@ void main() {
 
       //After incorrectly guessing 7 times, we expect to be renavigated to the Lose Screen
       expect(await driver.getText(findLoseText), 'You Lose');
+    },
+  );
+
+  test(
+    'at the lose screen we expect to see the final score',
+    () async {
+      final findScoreTextWidget = find.byValueKey('score-text');
+
+      expect(await driver.getText(findScoreTextWidget), 'Score: -35');
     },
   );
 
